@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:18
+    container_name: chat-db
+    ports:
+      - "5432:5432"
+    networks:
+      - uolnetwork
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=chatuol
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -q -d chatuol -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+#   backend:
+#     image: chatuol
+#     container_name: uolBackend
+#     build: .
+#     ports:
+#       - 5000:5000
+#     networks:
+#       - uolnetwork
+#     env_file:
+#       - .env
+#     depends_on:
+#       db:
+#           condition: service_healthy
+ 
+networks:
+  uolnetwork:
+    name: uolnetwork
+
+volumes:
+  pgdata:
