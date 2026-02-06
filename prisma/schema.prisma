@@ -13,6 +13,22 @@ model User {
   username String @unique
   password String 
   createdAt DateTime @default(now())
+
+  messages Message[]
   
   @@map("users")
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+  text String
+  type String
+  to String
+  createdAt DateTime @default(now())
+
+  userId Int
+  user User  @relation(fields: [userId], references: [id])
+
+
+  @@map("messages")
 }
