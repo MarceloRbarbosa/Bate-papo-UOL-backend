@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 dotenv.config();
 import app from "./app";
 

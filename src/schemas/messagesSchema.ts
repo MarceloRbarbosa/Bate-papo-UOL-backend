@@ -1,4 +1,4 @@
-import Joi from "joi";
+import * as Joi from "joi"
 
 export const createMessageSchema = Joi.object({
   to: Joi.string().allow("").optional(),
